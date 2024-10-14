@@ -60,6 +60,33 @@ function sendComplaintEmail($name, $email, $complaint) {
     }
 }
 
+use Monolog\Level;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
+// Create a log channel
+$log = new Logger('app_logs');
+
+// Path to log file (ensure this path is writable)
+$logFilePath = __DIR__ . '/logs/app.log';
+
+// Push the handler to the logger
+$log->pushHandler(new StreamHandler($logFilePath, Level::Warning));
+
+// Add records to the log
+$log->warning('This is a warning message');
+$log->error('This is an error message');
+
+$logDir = __DIR__ . '/logs';
+if (!is_dir($logDir)) {
+    mkdir($logDir, 0777, true);
+}
+
+$log->info('This is an info message');
+$log->debug('This is a debug message');
+$log->critical('This is a critical message');
+
+
 ?>
 
 <!DOCTYPE html>

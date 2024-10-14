@@ -1,3 +1,0 @@
-# Ignore .env file to keep sensitive data private
-*.env
-/vendor
